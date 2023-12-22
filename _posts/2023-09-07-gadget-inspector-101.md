@@ -1,6 +1,5 @@
 ---
 title: Gadget Inspector 101
-author: HoangND
 date: 2023-09-07 08:51:00 +0700
 categories: [Others]
 tags: []

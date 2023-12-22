@@ -1,6 +1,5 @@
 ---
 title: HTB Under Construction
-author: HoangND
 date: 2021-09-06 02:07:00 +0700
 categories: [HackTheBox]
 tags: [sqli, jwt]

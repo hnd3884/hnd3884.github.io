@@ -1,6 +1,5 @@
 ---
 title: Vulhub - EvilBox One
-author: HoangND
 date: 2023-01-03 00:00:00 +0700
 categories: [Vulhub]
 tags: [vulhub]

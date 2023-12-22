@@ -1,6 +1,5 @@
 ---
 title: Vulhub - CyberSploit2
-author: HoangND
 date: 2023-01-16 00:00:00 +0700
 categories: [Vulhub]
 tags: [vulhub]

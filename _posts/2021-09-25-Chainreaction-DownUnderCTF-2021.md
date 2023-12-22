@@ -1,6 +1,5 @@
 ---
 title: Chainreaction - DownUnderCTF 2021
-author: HoangND
 date: 2021-09-25 15:55:00 +0700
 categories: [CTFs, DownUnderCTF 2021]
 tags: [xss, web, unicode normalised]

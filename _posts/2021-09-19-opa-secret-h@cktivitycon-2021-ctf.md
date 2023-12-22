@@ -1,6 +1,5 @@
 ---
 title: OPA Secret - H@acktivityCon 2021 CTF
-author: HoangND
 date: 2021-09-19 15:55:00 +0700
 categories: [CTFs, H@cktivityCon 2021 CTF]
 tags: [ssrf, web]

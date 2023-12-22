@@ -1,6 +1,5 @@
 ---
 title: HTB Petpet Rcbee
-author: HoangND
 date: 2021-09-05 08:51:00 +0700
 categories: [HackTheBox]
 tags: [pil, ghost script]
