@@ -4,4 +4,4 @@ icon: fas fa-info-circle
 order: 4
 ---
 
-HoangND | hir0ot currently working at SHBFSEC
+HoangND - hir0ot currently working at SHBFSEC
