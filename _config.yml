@@ -16,7 +16,7 @@ timezone: Asia/Ho_Chi_Minh
 
 title: HoangND # the main title
 
-tagline: hir0ot | pentester | security researcher # it will display as the sub-title
+tagline: hir0ot | pentester | part-time security researcher | currently working at SHFSEC # it will display as the sub-title
 
 description: >- # used by seo meta and the atom feed
   A minimal, responsive and feature-rich Jekyll theme for technical writing.
@@ -42,7 +42,7 @@ social:
     - https://github.com/hnd3884 # change to your github homepage
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
-    # - https://www.linkedin.com/in/username
+    - https://www.linkedin.com/in/hoang-nguyen-dinh-40b01b155/
 
 google_site_verification: TfvZ9qjq-FON4dsURjq-_zTPDu1wLUj3bMCMmf-atHU # fill in to your verification string
 
