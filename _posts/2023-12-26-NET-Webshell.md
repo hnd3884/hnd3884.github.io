@@ -1,4 +1,4 @@
-![image](https://github.com/hnd3884/hnd3884.github.io/assets/61985236/43e8f6cc-9882-49f5-b58b-73faa89827ad)---
+---
 title: .NET Webshell
 date: 2023-12-26 08:51:00 +0700
 categories: [Others]
@@ -132,5 +132,5 @@ ysoserial.exe -g ActivitySurrogateSelectorFromFile -f BinaryFormatter -c "Exploi
 
 Put payload to [string] param. Now we can execute any command via [c] parameter
 
-![image](https://github.com/hnd3884/hnd3884.github.io/assets/61985236/60534912-dba6-4580-8aab-cc128df49ad7)
+![image](https://github.com/hnd3884/hnd3884.github.io/assets/61985236/43e8f6cc-9882-49f5-b58b-73faa89827ad)
 
