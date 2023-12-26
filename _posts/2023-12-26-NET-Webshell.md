@@ -60,7 +60,7 @@ To sum up, you have to has to combine path traversal with arbitrary file upload,
 ## Deserialize
 In case of deserialize, each time we want to execute different command, we have to re-generate payload using ysoserial, then url encode, send request, etc, ... For better use, sometimes people manipulate deserialization to create web shell, but it leads to problem I already said in the overview above. But we really can get shell without creating files on the server with gadget ActivitySurrogateSelectorFromFile already included in ysoserial. This gadget will create an assembly with our custom C# code, then when deserialize, make the server load that assembly.
 
-First create deserialize.aspx for demonstration, this basically base64-decodes [string] parameter and deserialize the result.
+First create deserialize.aspx for demonstration, this basically decodes base64 in [string] parameter and deserialize the result.
 
 ```csharp
 <%@ Page Language="C#" Debug="true" Trace="false" %>
