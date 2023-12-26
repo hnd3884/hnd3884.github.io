@@ -49,6 +49,14 @@ Then open Developer Powershell for VS, execute the following command `aspnet_com
 
 Then [out dir] has the following files
 
-![image](https://github.com/hnd3884/hnd3884.github.io/assets/61985236/e6dbe01c-f339-4272-82a1-4a0ed56bba7b)
+![image](https://github.com/hnd3884/hnd3884.github.io/assets/61985236/4464d548-dff7-48a8-bbc0-df1be05c4fe8)
+
+Then upload folder bin to webserver, we can finally execute our webshell
+
+![image](https://github.com/hnd3884/hnd3884.github.io/assets/61985236/1ced33d3-603a-43e2-947f-c1f72cfd3dad)
+
+To sum up, you have to has to combine path traversal with arbitrary file upload, that makes it harder to get shell.
+
+## Deserialize
 
 
