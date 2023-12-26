@@ -134,3 +134,4 @@ Put payload to [string] param. Now we can execute any command via [c] parameter
 
 ![image](https://github.com/hnd3884/hnd3884.github.io/assets/61985236/43e8f6cc-9882-49f5-b58b-73faa89827ad)
 
+In conclusion, this method allows us to load webshell to the memory and helps our webshell avoid security solutions' observation of file changes on the server. But it's not as powerful as memory shell in Java, because we have to carry deserialization payload in each http request.
