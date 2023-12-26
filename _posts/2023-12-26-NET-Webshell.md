@@ -27,4 +27,28 @@ Then save and publish, your website would be deploy to /rcelab in case of above 
 ![image](https://github.com/hnd3884/hnd3884.github.io/assets/61985236/79e5e913-4328-4d36-87ad-46908d7aca2e)
 
 ## Precompiled application
-Some of the application applies precompiled deployment, so that all .aspx file on the server would look like this
+Some of the application i faced applies precompiled deployment. To setup, in your Visual Studio solution, change publish setting like the following, check [Precompiled during publishing] option, and in Advanced Settings, uncheck the [allow precompiled site to be updatable], then publish again
+
+![image](https://github.com/hnd3884/hnd3884.github.io/assets/61985236/56fff7e1-35f8-4645-bae2-022faa07cdd5)
+
+Now all the .aspx file on the server would look like this
+
+![image](https://github.com/hnd3884/hnd3884.github.io/assets/61985236/e86dbb51-b6d7-4432-b7f2-c3f11efbf27d)
+
+In this condition, even when we can upload a .aspx webshell to the web directory, it could not be executed as expected.
+
+![image](https://github.com/hnd3884/hnd3884.github.io/assets/61985236/f71bca01-44b9-4880-b4b4-a5e3156b2196)
+
+In this case we have to compile our web shell before upload to webserver. To do that, use aspnet_compiler tools, first create webshell in empty folder 
+
+![image](https://github.com/hnd3884/hnd3884.github.io/assets/61985236/6f4cedc6-30e0-4620-b1d1-5cdbc888723f)
+
+Then open Developer Powershell for VS, execute the following command `aspnet_compiler -p [physical path] -v / [out dir]` 
+
+![image](https://github.com/hnd3884/hnd3884.github.io/assets/61985236/217d629e-49ea-4922-9bb4-775481119b24)
+
+Then [out dir] has the following files
+
+![image](https://github.com/hnd3884/hnd3884.github.io/assets/61985236/e6dbe01c-f339-4272-82a1-4a0ed56bba7b)
+
+
