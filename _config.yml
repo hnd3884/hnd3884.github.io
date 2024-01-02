@@ -51,7 +51,9 @@ google_site_verification: TfvZ9qjq-FON4dsURjq-_zTPDu1wLUj3bMCMmf-atHU # fill in 
 
 google_analytics:
   id: G-PQ5K8VK6JD # fill in your Google Analytics ID
-
+  pv:
+    proxy_endpoint: 'https://hnd3884githubio.appspot.com/query?id=ahN6ZGV-aG5kMzg4NGdpdGh1YmlvchULEghBcGlRdWVyeRiAgIDo14eBCgw'
+    cache_path:       # the local PV cache data, friendly to visitors from GFW region
 # Prefer color scheme setting.
 #
 # Note: Keep empty will follow the system prefer color by default,
