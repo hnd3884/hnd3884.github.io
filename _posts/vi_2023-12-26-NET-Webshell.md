@@ -141,7 +141,7 @@ That idea is already implemented in Ysoserial here https://github.com/pwntester/
 
 ![image](https://github.com/hnd3884/hnd3884.github.io/assets/61985236/78ad1bc5-60ee-48c1-91ac-07aa01cd695e)
 
-with Exists function always return True, we can access arbitrary filename to get shell, the Open function would be used to return our shell content. For custom VirtualDirectory, we just have to care that whether our virtual path is exist or not
+with Exists function always return True, we can access arbitrary filename to get shell, the Open function would be used to return our shell content. For custom VirtualDirectory, we just have to care that whether our virtual path already exists or not
 
 ![image](https://github.com/hnd3884/hnd3884.github.io/assets/61985236/6d31d5c4-facc-47f3-a17f-9f2428bec51d)
 
