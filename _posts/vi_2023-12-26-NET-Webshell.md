@@ -137,7 +137,7 @@ Put payload to [string] param. Now we can execute any command via [c] parameter
 This method allows us to load webshell to the memory and helps our webshell avoid security solutions' observation of file changes on the server. But it's not as powerful as memory shell in Java, because we have to carry deserialization payload in each http request. So if deserialization is somehow patched, our shell is gone. We can bypass this restriction by abusing the Virtual Path Provider in .NET. 
 
 ## Ghost shell in .NET Virtual Path Provider
-That idea is already implemented in Ysoserial here https://github.com/pwntester/ysoserial.net/blob/master/ExploitClass/GhostWebShell.cs. This technique requires 3 custom elements VirtualPathProvider, VirtualFile and VirtualDirectory. First We create custom VirtualFile to serve our shell.
+Using .NET, it is possible to define virtual paths in order to serve virtual files from storages sources other than the file system. That would help us to create webshell without create any files in target server to avoid detection. That idea is already implemented in Ysoserial here https://github.com/pwntester/ysoserial.net/blob/master/ExploitClass/GhostWebShell.cs. This technique requires 3 custom elements VirtualPathProvider, VirtualFile and VirtualDirectory. First We create custom VirtualFile to serve our shell.
 
 ![image](https://github.com/hnd3884/hnd3884.github.io/assets/61985236/78ad1bc5-60ee-48c1-91ac-07aa01cd695e)
 
