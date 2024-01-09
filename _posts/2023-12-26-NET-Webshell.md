@@ -10,7 +10,7 @@ Webshell is basically the most common way to get RCE on the target. But that als
 While doing pentest/finding 0-days with .NET target, there are some cases i faced about webshell. Before go to details, you can quickly setup a lab for testing
 
 ## Setup
-I used a VMWare to create a IIS Webserver run on Windows Server 2016 to deploy a website on it. You have to add the following roles and features
+I u a VMWare to create a IIS Webserver run on Windows Server 2016 to deploy a website on it. You have to add the following roles and features
 
 ![image](https://github.com/hnd3884/hnd3884.github.io/assets/61985236/4789a892-76d7-4fea-93ec-2cc55bff7675)
 
