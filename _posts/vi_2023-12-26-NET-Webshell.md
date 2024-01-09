@@ -175,3 +175,16 @@ Remember to change your Microsoft.AspNet.FriendlyUrls.dll location. Then reprodu
 
 ![image](https://github.com/hnd3884/hnd3884.github.io/assets/61985236/d7230584-8e3b-4262-b9d4-ffd0a3bbb7bf)
 
+Another problem is that if we do want to run webshell through normally path rather than our virtual path, it would have us more difficult to be detected. It comes to [VirtualPathProvider.GetCacheKey](https://learn.microsoft.com/en-us/dotnet/api/system.web.hosting.virtualpathprovider.getcachekey?view=netframework-4.8.1) method. GetCacheKey method is used to provide a custom cache key for virtual resources. If you do not override the GetCacheKey method, the virtual path is used for the cache key.
+We can inject shell above `return base.GetCacheKey(virtualPath);` so if our cmd parameter is not apparence in request, everything still works fine.
+
+![image](https://github.com/hnd3884/hnd3884.github.io/assets/61985236/4477498a-bab2-4658-aba1-830f80d2d823)
+
+Normally web path
+
+![image](https://github.com/hnd3884/hnd3884.github.io/assets/61985236/dfe95943-5207-48cb-abc6-61c8c8c39dba)
+
+Inject our cmd parameter
+
+![image](https://github.com/hnd3884/hnd3884.github.io/assets/61985236/7d76104c-0c5a-454a-8839-f02bdfb4d3d8)
+
