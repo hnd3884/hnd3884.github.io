@@ -39,9 +39,7 @@ social:
   links:
     # The first element serves as the copyright owner's link
     - https://twitter.com/hir0ot # change to your twitter homepage
-    - https://github.com/hnd3884 # change to your github homepage
     # Uncomment below to add more social links
-    # - https://www.facebook.com/username
     - https://www.linkedin.com/in/hoang-nguyen-dinh-40b01b155/
 
 google_site_verification: TfvZ9qjq-FON4dsURjq-_zTPDu1wLUj3bMCMmf-atHU # fill in to your verification string
